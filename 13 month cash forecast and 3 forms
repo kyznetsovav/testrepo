@@ -1,0 +1,50 @@
+import pandas as pd
+# Actual financial data
+actual_data = {
+    'Date': ['2021-01-01', '2021-02-01', '2021-03-01', ...],  # Dates for actual data
+    'Cash': [10000, 15000, 20000, ...],  # Actual cash balances
+    'Revenue': [5000, 6000, 7000, ...],  # Actual revenue
+    'Expenses': [3000, 4000, 5000, ...],  # Actual expenses
+    # Add more financial statements as needed
+}
+
+# Forecasting inputs
+forecast_inputs = {
+    'Date': ['2022-01-01', '2022-02-01', '2022-03-01', ...],  # Dates for forecasting
+    # Add inputs for forecasting revenue, expenses, and other financial statements
+}
+
+# Create dataframes for actual data and forecasting inputs
+actual_df = pd.DataFrame(actual_data)
+forecast_df = pd.DataFrame(forecast_inputs)
+
+# Merge actual and forecast dataframes
+all_data = pd.concat([actual_df, forecast_df], ignore_index=True)
+
+# Calculate day by day cash forecast
+all_data['Cash Forecast (Day by Day)'] = all_data['Cash'].cumsum()
+
+# Calculate month by month cash forecast
+monthly_forecast = all_data.groupby(pd.Grouper(key='Date', freq='M')).sum()
+monthly_forecast['Cash Forecast (Month by Month)'] = monthly_forecast['Cash'].cumsum()
+
+# Calculate quarter to quarter cash forecast
+quarterly_forecast = all_data.groupby(pd.Grouper(key='Date', freq='Q')).sum()
+quarterly_forecast['Cash Forecast (Quarter to Quarter)'] = quarterly_forecast['Cash'].cumsum()
+
+# Calculate year to year cash forecast
+yearly_forecast = all_data.groupby(pd.Grouper(key='Date', freq='Y')).sum()
+yearly_forecast['Cash Forecast (Year to Year)'] = yearly_forecast['Cash'].cumsum()
+
+# Print the forecasts
+print("Day by day cash forecast:")
+print(all_data[['Date', 'Cash Forecast (Day by Day)']])
+
+print("Month by month cash forecast:")
+print(monthly_forecast[['Date', 'Cash Forecast (Month by Month)']])
+
+print("Quarter to quarter cash forecast:")
+print(quarterly_forecast[['Date', 'Cash Forecast (Quarter to Quarter)']])
+
+print("Year to year cash forecast:")
+print(yearly_forecast[['Date', 'Cash Forecast (Year to Year)']])
