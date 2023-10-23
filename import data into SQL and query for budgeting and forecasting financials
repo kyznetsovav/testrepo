@@ -1,0 +1,49 @@
+import pyodbc
+
+# Connect to the SQL database
+conn = pyodbc.connect('DRIVER={SQL Server};SERVER=your_server;DATABASE=your_database;UID=your_username;PWD=your_password')
+
+# Import data from 1S Accounting and/or SAP ERP into SQL database
+def import_data_from_1s():
+    # Your code to import data from 1S Accounting
+    pass
+
+def import_data_from_sap():
+    # Your code to import data from SAP ERP
+    pass
+
+# Perform queries to obtain PL, BS, CF for different periods of time
+def get_profit_loss(start_date, end_date):
+    # Your query to obtain Profit and Loss statement for the specified period
+    pass
+
+def get_balance_sheet(date):
+    # Your query to obtain Balance Sheet for the specified date
+    pass
+
+def get_cash_flow(start_date, end_date):
+    # Your query to obtain Cash Flow statement for the specified period
+    pass
+
+# Make forecasts and budgets based on financial statements
+def make_forecasts():
+    # Your code to make forecasts based on financial statements
+    pass
+
+def create_budget():
+    # Your code to create a budget based on financial statements
+    pass
+
+# Example usage
+import_data_from_1s()
+import_data_from_sap()
+
+pl_statement = get_profit_loss('2022-01-01', '2022-12-31')
+balance_sheet = get_balance_sheet('2022-12-31')
+cash_flow = get_cash_flow('2022-01-01', '2022-12-31')
+
+make_forecasts()
+create_budget()
+
+# Close the database connection
+conn.close()
